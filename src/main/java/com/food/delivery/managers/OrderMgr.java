@@ -30,8 +30,35 @@ public class OrderMgr {
         foodMgr.prepareFood(orderId, order.getRestaurant().getName(), order.getDishesOrdered());
     }
     public void createOrder(String orderId, Order order) throws InterruptedException {
-        manageFood(orderId, order);
-        manageDelivery(orderId, order);
+//        manageFood(orderId, order);
+//        manageDelivery(orderId, order);
+
+        Thread foodThread = new Thread(() -> {
+            try {
+                manageFood(orderId, order);
+            } catch (InterruptedException e) {
+                // Handle interruption if needed
+                e.printStackTrace();
+            }
+        });
+
+        Thread deliveryThread = new Thread(() -> {
+            try {
+                manageDelivery(orderId, order);
+            } catch (InterruptedException e) {
+                // Handle interruption if needed
+                e.printStackTrace();
+            }
+        });
+
+        // Start both threads
+        foodThread.start();
+        deliveryThread.start();
+
+        // Wait for both threads to finish
+        foodThread.join();
+        deliveryThread.join();
+
     }
     public Order getOrder(String orderID){
         return orderHashMap.get(orderID);
