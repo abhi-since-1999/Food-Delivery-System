@@ -16,6 +16,7 @@ public class Restaurant {
         System.out.println("Restaurant accepted the order and starting to prepare it");
         Thread.sleep(5000);
         System.out.println("Order prepared.");
+        Thread.sleep(1000);
     }
 
     public void addMenu(Menu menu){

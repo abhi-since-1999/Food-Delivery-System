@@ -19,6 +19,7 @@ public class DeliveryMgr {
         StrategyMgr strategyMgr = StrategyMgr.getStrategyMgrInstance();
         DeliveryPartnerMatchingStrategy deliveryPartnerMatchingStrategy = strategyMgr.determineDeliveryPartnerMatchingStrategy(deliveryMetaData);
         DeliveryPartner assignedDeliveryPartner = deliveryPartnerMatchingStrategy.matchDeliveryPartner(deliveryMetaData);
+        Thread.sleep(3000);
         System.out.println(assignedDeliveryPartner.getName() + " is your delivery partner.");
         Thread.sleep(10000);
         System.out.println("Shambhu has picked up your order");
